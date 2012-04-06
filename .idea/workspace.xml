@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e1787d1-06bc-4074-a745-46e752ad5695" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/file.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rspec/file_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/file_exchange.rb" afterPath="$PROJECT_DIR$/file_exchange.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rspec/file_exchange_spec.rb" afterPath="$PROJECT_DIR$/rspec/file_exchange_spec.rb" />
     </list>
     <ignored path="File-Exchange.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +28,9 @@
         <entry file="file://$PROJECT_DIR$/rspec/file_exchange_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="43" column="33" selection-start="1206" selection-end="1206" vertical-scroll-proportion="0.0">
-              <folding />
+              <folding>
+                <marker date="1333741536834" expanded="true" signature="1989:2020" placeholder="{ ... }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,7 +47,7 @@
       <file leaf-file-name="client_spec.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rspec/client_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="3" selection-start="417" selection-end="417" vertical-scroll-proportion="0.42090786">
+            <state line="18" column="3" selection-start="417" selection-end="417" vertical-scroll-proportion="0.34733257">
               <folding />
             </state>
           </provider>
@@ -59,7 +57,9 @@
         <entry file="file://$PROJECT_DIR$/file_exchange.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="18" column="0" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0">
-              <folding />
+              <folding>
+                <marker date="1333741216780" expanded="true" signature="567:653" placeholder=" ... end" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -198,7 +198,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="157" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="preferences.editor" />
+    <property name="options.lastSelected" value="settings.github" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="162" />
@@ -491,7 +491,11 @@
       <created>1333654721454</created>
       <updated>1333654721454</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added file">
+      <created>1333741997529</created>
+      <updated>1333741997529</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -518,21 +522,21 @@
     <frame x="654" y="0" width="1266" height="1040" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.123123124" sideWeight="0.32671082" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19633943" sideWeight="0.8300221" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19633943" sideWeight="0.67108166" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.123123124" sideWeight="0.33222958" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5037538" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16997792" sideWeight="0.99914896" order="2" side_tool="false" content_ui="tabs" x="556" y="371" width="1332" height="298" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16997792" sideWeight="0.99914896" order="2" side_tool="false" content_ui="tabs" x="556" y="371" width="1332" height="298" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39955848" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -573,7 +577,7 @@
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="client, file_exchange" />
+    <option name="LAST_COMMIT_MESSAGE" value="added file" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -587,6 +591,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="client, file_exchange" />
+    <MESSAGE value="added file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -626,14 +631,18 @@
     <entry file="file://$PROJECT_DIR$/file_exchange.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="0" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <marker date="1333741216780" expanded="true" signature="567:653" placeholder=" ... end" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rspec/file_exchange_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="33" selection-start="1206" selection-end="1206" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <marker date="1333741536834" expanded="true" signature="1989:2020" placeholder="{ ... }" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -646,7 +655,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rspec/client_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="3" selection-start="417" selection-end="417" vertical-scroll-proportion="0.42090786">
+        <state line="18" column="3" selection-start="417" selection-end="417" vertical-scroll-proportion="0.34733257">
           <folding />
         </state>
       </provider>
