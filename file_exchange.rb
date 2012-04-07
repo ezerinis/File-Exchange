@@ -1,3 +1,5 @@
+require "#{File.dirname(__FILE__)}/client"
+require "#{File.dirname(__FILE__)}/file"
 require 'set'
 
 class FileExchange
@@ -8,9 +10,9 @@ class FileExchange
     @files = Set.new
   end
 
-  def create_client(username, password)
+  def create_client(username, password, speed)
     exists = @clients.find { |c| c.username == username }
-    @clients.add(Client.new(username, password)) if !exists
+    @clients.add(Client.new(username, password, speed)) if !exists
   end
 
   def login(username, password)
@@ -25,6 +27,6 @@ class FileExchange
   def get_file_list
     list = Set.new
     files.each{ |file| list.add(file.name) }
-    return list
+    list
   end
 end
