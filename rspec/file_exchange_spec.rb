@@ -74,13 +74,23 @@ describe FileExchange do
         @file_exchange.create_file(@name, @size)
         @file_exchange.files.find_all { |f| f.name == @name }.size.should == 1
       end
-    end
 
-    it "should retrieve list of all file names" do
-      names = Set.new
-      retrieved_list = @file_exchange.get_file_list
-      @file_exchange.files.each { |file| names.add(file.name) }
-      names.should == retrieved_list
+      it "should retrieve list of all file names" do
+        names = Set.new
+        retrieved_list = @file_exchange.get_file_list
+        @file_exchange.files.each { |file| names.add(file.name) }
+        names.should == retrieved_list
+      end
+
+      it "should return file by name" do
+        file = @file_exchange.get_file(@name)
+        file.name.should == @name
+      end
+
+      it "should return files that match the search query" do
+        result = @file_exchange.search("f")
+        result.find_all { |f| f.name == "file1" || f.name == "file2" || f.name == "file3" }.size.should == 3
+      end
     end
   end
 end

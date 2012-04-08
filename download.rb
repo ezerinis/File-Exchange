@@ -8,16 +8,21 @@ class Download
     @client = client
     @progress = 0
     @paused = false
+    @thread = nil
+  end
+
+  def start
     @thread = Thread.new do
       while @progress < 100
         Thread.stop if @paused
-        portion = (@client.speed * (SLEEP_INTERVAL) * 100) / @file.size
+        speed = @client.speed.to_f / (@client.downloads.find_all { |d| d.progress < 100 && !d.paused }.size)
+        portion = (speed * (SLEEP_INTERVAL) * 100) / @file.size
         start_time = Time.now
         if portion + @progress <= 100
           sleep(SLEEP_INTERVAL - (Time.now - start_time))
           @progress += portion
         else
-          sleep(((100 - @progress) * @file.size) / (@client.speed * 100) - (Time.now - start_time))
+          sleep(((100 - @progress) * @file.size) / (speed * 100) - (Time.now - start_time))
           @progress = 100
         end
       end
@@ -37,5 +42,6 @@ class Download
 
   def stop
     @thread.kill
+    @client.downloads.delete(self)
   end
 end

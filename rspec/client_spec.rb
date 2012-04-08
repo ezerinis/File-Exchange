@@ -1,4 +1,5 @@
 require "#{File.dirname(__FILE__)}/../client"
+require "#{File.dirname(__FILE__)}/../file"
 
 describe Client do
 
@@ -18,8 +19,9 @@ describe Client do
       @client.speed.should == @speed
     end
 
-    it "should initialize ratio at 0" do
-      @client.ratio.should == 0
+    it "should correctly initialize variables" do
+      @client.downloads.each { |a| puts a.file.name, a.client.username }
+      @client.downloads.should have(0).items
     end
 
     it "should raise an error if name or password lengths are incorrect" do
@@ -49,4 +51,32 @@ describe Client do
       @client.speed.should <= @client.max_speed
     end
   end
+
+  describe "download operations" do
+
+    it "should add new download to downloads list" do
+      @file = File.new("big file", 7)
+      @client.new_download(@file, @client)
+      @client.downloads.find { |d| d.file == @file && d.client == @client }.should_not == nil
+    end
+  end
+
+  describe "password change" do
+
+    it "should correctly change password" do
+      new_pass = "1234"
+      @client.change_password(new_pass, new_pass)
+      @client.password.should == new_pass
+    end
+
+    it "should raise error if passwords don't match" do
+      lambda { @client.change_password("1234", "123") }.should raise_error
+    end
+
+    it "should raise error if new password doesn't fulfill requirements'" do
+      lambda { @client.change_password("1", "1") }.should raise_error
+    end
+  end
+
+
 end

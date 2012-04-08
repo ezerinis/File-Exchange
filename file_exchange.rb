@@ -29,4 +29,12 @@ class FileExchange
     files.each{ |file| list.add(file.name) }
     list
   end
+
+  def get_file(name)
+    @files.find { |f| f.name == name }
+  end
+
+  def search(query)
+    @files.find_all { |f| /#{query}/.match(f.name) }
+  end
 end
