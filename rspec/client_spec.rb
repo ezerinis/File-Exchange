@@ -22,6 +22,7 @@ describe Client do
     it "should correctly initialize variables" do
       @client.downloads.each { |a| puts a.file.name, a.client.username }
       @client.downloads.should have(0).items
+      @client.active_downloads.should == 0
     end
 
     it "should raise an error if name or password lengths are incorrect" do
@@ -32,32 +33,6 @@ describe Client do
     it "should raise an error if speed is negative or too big" do
       lambda { Client.new("qwerty", "123", -10) }.should raise_error
       lambda { Client.new("qwerty", "123", 100000) }.should raise_error
-    end
-  end
-
-  describe "downloading speed alteration" do
-
-    it "should correctly change download speed" do
-      @client.set_speed(2)
-      @client.speed.should == 2
-    end
-
-    it "should raise an error if speed is to be changed to negative" do
-      lambda { @client.set_speed(-1) }.should raise_error
-    end
-
-    it "should not exceed max_speed" do
-      @client.set_speed(20)
-      @client.speed.should <= @client.max_speed
-    end
-  end
-
-  describe "download operations" do
-
-    it "should add new download to downloads list" do
-      @file = File.new("big file", 7)
-      @client.new_download(@file, @client)
-      @client.downloads.find { |d| d.file == @file && d.client == @client }.should_not == nil
     end
   end
 
@@ -78,5 +53,20 @@ describe Client do
     end
   end
 
+  describe "downloading speed alteration" do
 
+    it "should correctly change download speed" do
+      @client.set_speed(2)
+      @client.speed.should == 2
+    end
+
+    it "should raise an error if speed is to be changed to negative" do
+      lambda { @client.set_speed(-1) }.should raise_error
+    end
+
+    it "should not exceed max_speed" do
+      @client.set_speed(20)
+      @client.speed.should <= @client.max_speed
+    end
+  end
 end

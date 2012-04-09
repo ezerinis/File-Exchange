@@ -2,7 +2,7 @@ require "#{File.dirname(__FILE__)}/download"
 require 'set'
 
 class Client
-  attr_accessor :username, :password, :max_speed, :speed, :downloads
+  attr_accessor :username, :password, :max_speed, :speed, :downloads, :active_downloads
 
   MIN_LENGTH = 3
   MAX_LENGTH = 10
@@ -15,9 +15,10 @@ class Client
     raise "Download speed can't be over #{MAX_SPEED}" if speed > MAX_SPEED
     @username = username
     @password = password
-    @max_speed = speed
-    @speed = speed
+    @max_speed = speed.to_f
+    @speed = speed.to_f
     @downloads = Set.new
+    @active_downloads = 0
   end
 
   def set_speed(speed)
@@ -25,12 +26,53 @@ class Client
     if speed > @max_speed
       @speed = @max_speed
     else
-      @speed = speed
+      @speed = speed.to_f
+    end
+    @speed = @speed / @active_downloads if @active_downloads > 0
+  end
+
+  def new_download(file, file_exchange = nil)
+    download = Download.new(file, self, file_exchange)
+    @downloads.add(download)
+    decrease_speed
+    download.start
+  end
+
+  def get_download(name)
+    @downloads.find { |d| d.file.name == name }
+  end
+
+  def pause_download(name)
+    download = get_download(name)
+    if !download.paused
+      download.pause
+      increase_speed
     end
   end
 
-  def new_download(file, client)
-    @downloads.add(Download.new(file, client))
+  def resume_download(name)
+    download = get_download(name)
+    if download.paused
+      download.resume
+      decrease_speed
+    end
+  end
+
+  def stop_download(name)
+    download = get_download(name)
+    download.stop
+    increase_speed
+    @downloads.delete(download)
+  end
+
+  def increase_speed
+    @speed = (@speed * @active_downloads).to_f / (@active_downloads - 1) if @active_downloads > 1
+    @active_downloads -= 1
+  end
+
+  def decrease_speed
+    @speed = (@speed * @active_downloads).to_f / (@active_downloads + 1) if @active_downloads > 0
+    @active_downloads += 1
   end
 
   def change_password(pass1, pass2)

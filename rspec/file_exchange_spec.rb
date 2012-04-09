@@ -39,12 +39,18 @@ describe FileExchange do
       end
     end
 
-    describe "client authentication" do
+    describe "client account operations" do
 
-      it "should find correct client" do
+      it "should login client" do
         username = "aaa"
         @logged_in = @file_exchange.login(username, "123")
         @logged_in.username.should == username
+      end
+
+      it "should unregister client" do
+        temp_client = Client.new("temp", "lll", 10)
+        @file_exchange.unregister(temp_client)
+        @file_exchange.clients.member?(temp_client).should == false
       end
     end
   end
@@ -90,6 +96,33 @@ describe FileExchange do
       it "should return files that match the search query" do
         result = @file_exchange.search("f")
         result.find_all { |f| f.name == "file1" || f.name == "file2" || f.name == "file3" }.size.should == 3
+      end
+    end
+
+    describe "upload file" do
+
+      before :all do
+        @client = Client.new("asdf", "qwasf", 5)
+        @file_exchange.upload_file("uploaded", 5, @client)
+      end
+
+      it "should not add file to files list while it's not uploaded" do
+        sleep(5 / @client.speed - 0.5)
+        @file_exchange.get_file("uploaded").should == nil
+      end
+
+      it "should add file to files list when it's uploaded" do
+        sleep(0.5)
+        @file_exchange.get_file("uploaded").should_not == nil
+      end
+
+      it "should not upload file with existing name" do
+        lambda { @file_exchange.upload_file("uploaded", 10, @client) }.should raise_error
+      end
+
+      it "should not upload file with invalid size" do
+        lambda { @file_exchange.upload_file("new", -45, @client) }.should raise_error
+        lambda { @file_exchange.upload_file("new", 10000, @client) }.should raise_error
       end
     end
   end

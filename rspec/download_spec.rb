@@ -22,53 +22,63 @@ describe Download do
 
     it "should correctly initialize variables" do
       @download.progress.should == 0
+      @download.paused.should == false
     end
   end
 
-  describe "download process" do
+  describe "single download process" do
 
-    before :each do
-      @download = Download.new(@file, @client)
-      @client.downloads.add(@download)
+    before :all do
+      @download = Download.new(@file, Client.new("bbb", "456", 9))
       @download.start
+    end
+
+    it "should be running if enough time hasn't passed" do
+      sleep(@download.file.size.to_f / @download.client.speed - 0.2)
+      @download.progress.should < 100
     end
 
     it "should be finished if enough time has passed" do
       sleep(@download.file.size.to_f / @download.client.speed)
       @download.progress.should == 100
     end
+  end
 
-    it "should be running if enough time hasn't passed" do
-      sleep((@download.file.size.to_f / @download.client.speed) - 0.1)
-      @download.progress.should < 100
+  describe "multi download process" do
+
+    before :all do
+      @client.new_download(File.new("new1", 15))
+      @client.new_download(File.new("new2", 12))
+      @download1 = @client.get_download("new1")
+      @download2 = @client.get_download("new2")
     end
 
-
-
-    it "should increase download time proportionally if more downloads are active" do
-      sleep((@download.file.size + @download2.file.size).to_f / @client.speed)
-      @download.progress.should == 100
-      @download2.progress.should == 100
+    it "should proportionally decrease client's speed if multiple downloads are active" do
+      @client.speed.should == @client.max_speed / 2
     end
 
-    it "shouldn't finish downloading too soon if more downloads are active" do
-      sleep((@download.file.size + @download2.file.size).to_f / @client.speed - 2)
-      puts @download.progress, @download2.progress
-      (@download.progress < 100 || @download2.progress < 100).should == true
+    it "should increase download speed if some downloads have finished" do
+      sleep(@download2.file.size.to_f / @client.speed)
+      @client.speed.should == @client.max_speed
     end
   end
 
   describe "download operations" do
 
     before :all do
-      @download = Download.new(@file, @client)
+      @name = "big file"
       @time = Download::SLEEP_INTERVAL + 0.1
-      @download.start
+      @client.new_download(File.new(@name, 10))
+      @download = @client.get_download(@name)
+    end
+
+    it "should add new download to downloads list when started" do
+      @client.downloads.find { |d| d.file.name == @name }.should_not == nil
     end
 
     it "should stop increasing progress if paused" do
       sleep(@time)
-      @download.pause
+      @client.pause_download(@name)
       sleep(@time)
       temp_progress = @download.progress
       sleep(@time)
@@ -77,26 +87,19 @@ describe Download do
 
     it "should continue increasing progress if resumed" do
       temp_progress = @download.progress
-      @download.resume
+      @client.resume_download(@name)
       sleep(@time)
       @download.progress.should > temp_progress
     end
 
     it "should stop downloading if stopped" do
       temp_progress = @download.progress
-      @download.stop
+      @client.stop_download(@name)
       @download.progress.should == temp_progress
     end
 
     it "should be deleted from downloads list if stopped" do
-      @client.downloads.should_not include(self)
-    end
-
-    it "should not resume if stopped" do
-      temp_progress = @download.progress
-      @download.resume
-      sleep(@time)
-      @download.progress.should == temp_progress
+      @client.downloads.should_not include(@download)
     end
   end
 end

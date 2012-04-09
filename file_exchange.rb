@@ -19,9 +19,19 @@ class FileExchange
     @clients.find { |c| c.username == username && c.password == password }
   end
 
+  def unregister(client)
+    @clients.delete(client)
+  end
+
   def create_file(name, size)
     exists = @files.find { |c| c.name == name }
     @files.add(File.new(name, size)) if !exists
+  end
+
+  def upload_file(name, size, client)
+    raise "File with this name already exists" if @files.find { |f| f.name == name }
+    raise "File size is invalid" if !size.between?(1, 9999)
+    client.new_download(File.new(name, size), self)
   end
 
   def get_file_list
