@@ -19,8 +19,8 @@ describe File do
       @file.date.should == Date.today
     end
 
-    it "should assign rating to nil" do
-      @file.rating.should == nil
+    it "should assign rating to 0" do
+      @file.rating.should == 0
     end
 
     describe "file rating" do

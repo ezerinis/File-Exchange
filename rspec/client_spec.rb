@@ -20,7 +20,6 @@ describe Client do
     end
 
     it "should correctly initialize variables" do
-      @client.downloads.each { |a| puts a.file.name, a.client.username }
       @client.downloads.should have(0).items
       @client.active_downloads.should == 0
     end

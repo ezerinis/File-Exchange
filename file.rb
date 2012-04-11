@@ -11,7 +11,7 @@ class File
     @name = name
     @size = size
     @date = Date.today
-    @rating = nil
+    @rating = 0
     @clients = Set.new
     @sum = 0
   end

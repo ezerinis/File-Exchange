@@ -12,7 +12,10 @@ class FileExchange
 
   def create_client(username, password, speed)
     exists = @clients.find { |c| c.username == username }
-    @clients.add(Client.new(username, password, speed)) if !exists
+    return nil if exists
+    client = Client.new(username, password, speed)
+    @clients.add(client)
+    client
   end
 
   def login(username, password)
@@ -26,6 +29,7 @@ class FileExchange
   def create_file(name, size)
     exists = @files.find { |c| c.name == name }
     @files.add(File.new(name, size)) if !exists
+    !exists
   end
 
   def upload_file(name, size, client)
@@ -40,11 +44,30 @@ class FileExchange
     list
   end
 
+  def get_highest_rated_files
+    list = Set.new
+    3.times do
+      highest = nil
+      files.each do |file|
+        if highest != nil
+          highest = file if (highest.rating < file.rating) && !list.include?(file.name)
+        else
+          highest = file if !list.include?(file.name)
+        end
+      end
+      list.add(highest.name) if highest != nil
+    end
+    list
+  end
+
   def get_file(name)
     @files.find { |f| f.name == name }
   end
 
   def search(query)
-    @files.find_all { |f| /#{query}/.match(f.name) }
+    files = @files.find_all { |f| /#{query}/.match(f.name) }
+    file_names = Set.new
+    files.each { |f| file_names.add(f.name) }
+    file_names
   end
 end
