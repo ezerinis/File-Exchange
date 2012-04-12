@@ -29,21 +29,35 @@ class Download
       @client.speed = (@client.speed * @client.active_downloads).to_f / (@client.active_downloads - 1) if @client.active_downloads > 1
       @client.active_downloads -= 1
       @file_exchange.files.add(@file) if @file_exchange != nil
+      @thread = nil
     end
   end
 
   def pause
-    @paused = true
+    if get_status == "downloading"
+      @paused = true
+      @client.increase_speed
+    end
   end
 
   def resume
-    if @thread.status == "sleep"
+    if get_status == "paused"
       @paused = false
+      @client.decrease_speed
       @thread.wakeup
     end
   end
 
   def stop
-    @thread.kill
+    if get_status != "finished"
+      @thread.kill
+      @client.increase_speed unless @paused
+    end
+  end
+
+  def get_status
+    return "finished" if @progress == 100
+    return "downloading" if !@paused
+    "paused"
   end
 end

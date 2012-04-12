@@ -1,11 +1,11 @@
-require "#{File.dirname(__FILE__)}/../file"
+require "#{File.dirname(__FILE__)}/../file_descriptor"
 
-describe File do
+describe FileDescriptor do
 
   before :all do
     @name = "ruby"
     @size = "20"
-    @file = File.new(@name, @size)
+    @file = FileDescriptor.new(@name, @size)
   end
 
   describe "file creation" do
@@ -40,8 +40,8 @@ describe File do
       end
 
       it "should not accept ratings out of range" do
-        lambda { @file.rate("qqq", File::MAX + 1) }.should raise_error
-        lambda { @file.rate("qqq", File::MIN - 1) }.should raise_error
+        lambda { @file.rate("qqq", FileDescriptor::MAX + 1) }.should raise_error
+        lambda { @file.rate("qqq", FileDescriptor::MIN - 1) }.should raise_error
       end
     end
   end

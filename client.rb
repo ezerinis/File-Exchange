@@ -44,24 +44,17 @@ class Client
 
   def pause_download(name)
     download = get_download(name)
-    if !download.paused
-      download.pause
-      increase_speed
-    end
+    download.pause
   end
 
   def resume_download(name)
     download = get_download(name)
-    if download.paused
-      download.resume
-      decrease_speed
-    end
+    download.resume
   end
 
   def stop_download(name)
     download = get_download(name)
     download.stop
-    increase_speed
     @downloads.delete(download)
   end
 
@@ -79,5 +72,9 @@ class Client
     raise "Passwords don't match" if pass1 != pass2
     raise "Password's length should be between [#{MIN_LENGTH}..#{MAX_LENGTH}]" if !pass1.length.between?(MIN_LENGTH, MAX_LENGTH)
     @password = pass1
+  end
+
+  def cancel_unfinished_downloads
+    @downloads.each { |d| stop_download(d.file.name) if d.get_status != "finished"}
   end
 end

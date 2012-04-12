@@ -1,7 +1,9 @@
 require "#{File.dirname(__FILE__)}/../client"
-require "#{File.dirname(__FILE__)}/../file"
+require "#{File.dirname(__FILE__)}/custom_matchers"
+require "#{File.dirname(__FILE__)}/../file_descriptor"
 
 describe Client do
+  include CustomMatchers
 
   before :all do
     @username = "andrius"
@@ -66,6 +68,23 @@ describe Client do
     it "should not exceed max_speed" do
       @client.set_speed(20)
       @client.speed.should <= @client.max_speed
+    end
+  end
+
+  describe "unfinished downloads cancellation" do
+
+    before :all do
+      [FileDescriptor.new("file1", 1), FileDescriptor.new("file2", 20), FileDescriptor.new("file3", 100)].each do |f|
+        @client.new_download(f)
+      end
+    end
+
+    it "should cancel unfinished downloads" do
+      sleep(0.5)
+      @client.pause_download("file2")
+      sleep(0.1)
+      @client.cancel_unfinished_downloads
+      @client.downloads.should include_download("file1")
     end
   end
 end

@@ -39,8 +39,8 @@ describe FileExchange do
       end
 
       it "should inform if succeded" do
-        @file_exchange.create_client("tata", "asdf", 2).instance_of?(Client).should == true
-        @file_exchange.create_client("tata", "asdf", 2).should == nil
+        @file_exchange.create_client("tata", "asdf", 2).should be_instance_of(Client)
+        @file_exchange.create_client("tata", "asdf", 2).should be_nil
       end
     end
 

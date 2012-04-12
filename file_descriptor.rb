@@ -1,7 +1,7 @@
 require 'date'
 require 'set'
 
-class File
+class FileDescriptor
   attr_accessor :name, :size, :date, :rating
 
   MAX = 5

@@ -1,5 +1,5 @@
 require "#{File.dirname(__FILE__)}/client"
-require "#{File.dirname(__FILE__)}/file"
+require "#{File.dirname(__FILE__)}/file_descriptor"
 require 'set'
 
 class FileExchange
@@ -28,14 +28,14 @@ class FileExchange
 
   def create_file(name, size)
     exists = @files.find { |c| c.name == name }
-    @files.add(File.new(name, size)) if !exists
+    @files.add(FileDescriptor.new(name, size)) if !exists
     !exists
   end
 
   def upload_file(name, size, client)
-    raise "File with this name already exists" if @files.find { |f| f.name == name }
-    raise "File size is invalid" if !size.between?(1, 9999)
-    client.new_download(File.new(name, size), self)
+    raise "FileDescriptor with this name already exists" if @files.find { |f| f.name == name }
+    raise "FileDescriptor size is invalid" if !size.between?(1, 9999)
+    client.new_download(FileDescriptor.new(name, size), self)
   end
 
   def get_file_list

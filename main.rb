@@ -4,13 +4,7 @@ require 'yaml'
 class Main
 
   def start
-    @fe = FileExchange.new
-    @fe.create_client("and", "123", 1)
-    @fe.create_file("ruby", 15)
-    @fe.create_file("rubymine", 200)
-    @fe.create_file("netbeans", 100)
-    @fe.create_file("java", 30)
-
+    @fe = File.open("#{File.dirname(__FILE__)}/dump.yaml", "r") { |object| YAML::load(object) }
     loop do
       puts "1. Log in"
       puts "2. Create account"
@@ -52,6 +46,8 @@ class Main
           puts "Unrecognized command\n\n"
       end
     end
+    @client.cancel_unfinished_downloads
+    File.open("#{File.dirname(__FILE__)}/dump.yaml", "w") { |file| file.puts YAML::dump(@fe) }
   end
 
   def logged_in
@@ -122,7 +118,6 @@ class Main
           account_management
           break if @client.nil?
         when "8" then
-          File.open("#{File.dirname(__FILE__)}/dump.yaml", "w") { |file| file.puts YAML::dump(@fe) }
           break
         else
           puts "Unrecognized command\n\n"
@@ -162,7 +157,7 @@ class Main
                 rating = Integer(gets.chomp)
                 puts
                 file.rate(@client.username, rating)
-                puts "File rated successfully\n\n"
+                puts "FileDescriptor rated successfully\n\n"
               rescue Exception => msg
                 puts "#{msg}\n\n"
               end
@@ -187,7 +182,7 @@ class Main
         i = 0
         @client.downloads.each do |d|
           i += 1
-          puts "#{i}. #{d.file.name} #{d.progress.round(2)}%"
+          puts "#{i}. #{d.file.name} #{d.progress.round(2)}% #{d.get_status}"
         end
         puts "r. Refresh"
         puts "x. Back"
@@ -198,7 +193,7 @@ class Main
         if input.between?("1", "#{i}")
           download = @client.get_download(@client.downloads.to_a[Integer(input) - 1].file.name)
           loop do
-            puts "File: #{download.file.name}; Size: #{download.file.size}; Progress: #{download.progress.round(2)}%"
+            puts "FileDescriptor: #{download.file.name}; Size: #{download.file.size}; Progress: #{download.progress.round(2)} Status: #{download.get_status}"
             puts "1. Pause download"
             puts "2. Resume download"
             puts "3. Cancel download"
