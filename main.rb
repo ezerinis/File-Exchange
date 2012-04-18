@@ -1,10 +1,15 @@
-require "#{File.dirname(__FILE__)}/file_exchange"
+require "#{File.dirname(__FILE__)}/file_descriptor"
 require 'yaml'
 
 class Main
 
   def start
-    @fe = File.open("#{File.dirname(__FILE__)}/dump.yaml", "r") { |object| YAML::load(object) }
+    Client.new("and", "123", 1)
+    FileDescriptor.new("ruby", 15)
+    FileDescriptor.new("rubymine", 200)
+    FileDescriptor.new("netbeans", 100)
+    FileDescriptor.new("java", 30)
+    #@fe = File.open("#{File.dirname(__FILE__)}/dump.yaml", "r") { |object| YAML::load(object) }
     loop do
       puts "1. Log in"
       puts "2. Create account"
@@ -16,7 +21,7 @@ class Main
           username = gets.chomp
           puts "Enter password"
           password = gets.chomp
-          @client = @fe.login(username, password)
+          @client = Client::login(username, password)
           puts
           if @client.nil?
             puts "Wrong username or password\n\n"

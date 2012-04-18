@@ -7,8 +7,10 @@ describe Download do
   include CustomMatchers
 
   before :all do
-    @file = FileDescriptor.new("ruby", 15)
-    @client = Client.new("aaa", "123", 9)
+    FileDescriptor.files.each { |f| FileDescriptor.files.delete(f) }
+    Client.clients.each { |c| Client.clients.delete(c) }
+    @file = FileDescriptor.new("ruby", 12)
+    @client = Client.new("andrius", "123", 9)
   end
 
   describe "download creation" do
@@ -22,37 +24,40 @@ describe Download do
       @download.client.should == @client
     end
 
-    it "should correctly initialize variables" do
+    it "should initialize progress to 0" do
       @download.progress.should == 0
-      @download.paused.should == false
     end
   end
 
   describe "single download process" do
 
     before :all do
-      @download = Download.new(@file, Client.new("bbb", "456", 9))
+      @download = Download.new(@file, @client)
       @download.start
     end
 
     it "should be running if enough time hasn't passed" do
-      sleep(@download.file.size.to_f / @download.client.speed - 0.2)
+      sleep(@download.file.size / @download.client.speed - 0.2)
       @download.progress.should < 100
     end
 
     it "should be finished if enough time has passed" do
-      sleep(@download.file.size.to_f / @download.client.speed)
+      sleep(0.3)
       @download.progress.should == 100
+    end
+
+    after :all do
+      @client.active_downloads = 0
     end
   end
 
   describe "multi download process" do
 
     before :all do
-      @client.new_download(FileDescriptor.new("new1", 15))
-      @client.new_download(FileDescriptor.new("new2", 12))
-      @download1 = @client.get_download("new1")
-      @download2 = @client.get_download("new2")
+      @client.download_file(FileDescriptor.new("file1", 11))
+      @client.download_file(FileDescriptor.new("file2", 2))
+      @download1 = @client.get_download("file1")
+      @download2 = @client.get_download("file2")
     end
 
     it "should proportionally decrease client's speed if multiple downloads are active" do
@@ -60,17 +65,22 @@ describe Download do
     end
 
     it "should increase download speed if some downloads have finished" do
-      sleep(@download2.file.size.to_f / @client.speed)
+      sleep(@download2.file.size / @client.speed)
       @client.speed.should == @client.max_speed
+    end
+
+    after :all do
+      @client.active_downloads = 0
+      @client.downloads = Set.new
     end
   end
 
   describe "download operations" do
 
     before :all do
-      @name = "big file"
       @time = Download::SLEEP_INTERVAL + 0.1
-      @client.new_download(FileDescriptor.new(@name, 10))
+      @name = "rubymine"
+      @client.download_file(FileDescriptor.new(@name, 10))
       @download = @client.get_download(@name)
     end
 
@@ -115,17 +125,32 @@ describe Download do
     it "should be deleted from downloads list if stopped" do
       @client.downloads.should_not include(@download)
     end
+  end
 
-    it "should not decrease download speed if resuming finished download" do
-      lambda { @client.resume_download("new1") }.should_not change(@client, :active_downloads)
+  describe "download operations when download finished" do
+
+    before :all do
+      @name = "netbeans"
+      @client.download_file(FileDescriptor.new(@name, 2))
+      sleep(@client.get_download(@name).file.size / @client.speed)
     end
 
-    it "should not increase download speed if pausing or stopping finished download" do
-      lambda { @client.pause_download("new1") }.should_not change(@client, :active_downloads)
-      lambda { @client.stop_download("new1") }.should_not change(@client, :active_downloads)
+    it "should not increase active downloads if resuming finished download" do
+      lambda { @client.resume_download(@name) }.should_not change(@client, :active_downloads)
     end
 
-    it "should return download status" do
+    it "should not decrease active downloads speed if pausing finished download" do
+      lambda { @client.pause_download(@name) }.should_not change(@client, :active_downloads)
+    end
+
+    it "should not decrease active downloads if stopping finished download" do
+      lambda { @client.stop_download(@name) }.should_not change(@client, :active_downloads)
+      end
+  end
+
+  describe "download status" do
+
+    it "should correctly return download status" do
       download = Download.new(FileDescriptor.new("file", 1), @client)
       download.start
       download.get_status.should == "downloading"

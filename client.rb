@@ -4,6 +4,8 @@ require 'set'
 class Client
   attr_accessor :username, :password, :max_speed, :speed, :downloads, :active_downloads
 
+  @@clients = Set.new
+
   MIN_LENGTH = 3
   MAX_LENGTH = 10
   MAX_SPEED = 100
@@ -13,12 +15,28 @@ class Client
     raise "Password's length should be between [#{MIN_LENGTH}..#{MAX_LENGTH}]" if !password.length.between?(MIN_LENGTH, MAX_LENGTH)
     raise "Download speed can't be negative" if speed < 0
     raise "Download speed can't be over #{MAX_SPEED}" if speed > MAX_SPEED
+    raise "Client with this username already exists" if @@clients.find { |c| c.username == username }
     @username = username
     @password = password
     @max_speed = speed.to_f
     @speed = speed.to_f
     @downloads = Set.new
     @active_downloads = 0
+    @@clients.add(self)
+  end
+
+  def self.login(username, password)
+    @@clients.find { |c| c.username == username && c.password == password }
+  end
+
+  def change_password(pass1, pass2)
+    raise "Passwords don't match" if pass1 != pass2
+    raise "Password's length should be between [#{MIN_LENGTH}..#{MAX_LENGTH}]" if !pass1.length.between?(MIN_LENGTH, MAX_LENGTH)
+    @password = pass1
+  end
+
+  def self.unregister(client)
+    @@clients.delete(client)
   end
 
   def set_speed(speed)
@@ -31,11 +49,15 @@ class Client
     @speed = @speed / @active_downloads if @active_downloads > 0
   end
 
-  def new_download(file, file_exchange = nil)
-    download = Download.new(file, self, file_exchange)
+  def download_file(file, is_upload = false)
+    download = Download.new(file, self, is_upload)
     @downloads.add(download)
     decrease_speed
-    download.start
+    download.start(is_upload)
+  end
+
+  def upload_file(file)
+    download_file(file, true)
   end
 
   def get_download(name)
@@ -59,22 +81,20 @@ class Client
   end
 
   def increase_speed
-    @speed = (@speed * @active_downloads).to_f / (@active_downloads - 1) if @active_downloads > 1
+    @speed = (@speed * @active_downloads) / (@active_downloads - 1) if @active_downloads > 1
     @active_downloads -= 1
   end
 
   def decrease_speed
-    @speed = (@speed * @active_downloads).to_f / (@active_downloads + 1) if @active_downloads > 0
+    @speed = (@speed * @active_downloads) / (@active_downloads + 1) if @active_downloads > 0
     @active_downloads += 1
-  end
-
-  def change_password(pass1, pass2)
-    raise "Passwords don't match" if pass1 != pass2
-    raise "Password's length should be between [#{MIN_LENGTH}..#{MAX_LENGTH}]" if !pass1.length.between?(MIN_LENGTH, MAX_LENGTH)
-    @password = pass1
   end
 
   def cancel_unfinished_downloads
     @downloads.each { |d| stop_download(d.file.name) if d.get_status != "finished"}
+  end
+
+  def self.clients
+    @@clients
   end
 end

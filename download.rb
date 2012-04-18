@@ -1,18 +1,17 @@
 class Download
-  attr_accessor :file, :client, :progress, :paused
+  attr_accessor :file, :client, :progress
 
   SLEEP_INTERVAL = 0.1
 
-  def initialize(file, client, file_exchange = nil)
+  def initialize(file, client, is_upload = false)
     @file = file
     @client = client
-    @file_exchange = file_exchange
     @progress = 0
     @paused = false
     @thread = nil
   end
 
-  def start
+  def start(is_upload = false)
     @thread = Thread.new do
       while @progress < 100
         Thread.stop if @paused
@@ -26,9 +25,9 @@ class Download
           @progress = 100
         end
       end
-      @client.speed = (@client.speed * @client.active_downloads).to_f / (@client.active_downloads - 1) if @client.active_downloads > 1
+      @client.speed = (@client.speed * @client.active_downloads) / (@client.active_downloads - 1) if @client.active_downloads > 1
       @client.active_downloads -= 1
-      @file_exchange.files.add(@file) if @file_exchange != nil
+      FileDescriptor.files.add(@file) if is_upload
       @thread = nil
     end
   end
