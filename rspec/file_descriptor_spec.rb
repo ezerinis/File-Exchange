@@ -3,8 +3,8 @@ require "#{File.dirname(__FILE__)}/../file_descriptor"
 describe FileDescriptor do
 
   before :all do
-    FileDescriptor.files.each { |f| FileDescriptor.files.delete(f) }
-    Client.clients.each { |c| Client.clients.delete(c) }
+    FileDescriptor.files.clear
+    Client.clients.clear
     @name = "ruby"
     @size = 20
     @file = FileDescriptor.new(@name, @size)

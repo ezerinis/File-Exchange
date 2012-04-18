@@ -7,8 +7,8 @@ describe Download do
   include CustomMatchers
 
   before :all do
-    FileDescriptor.files.each { |f| FileDescriptor.files.delete(f) }
-    Client.clients.each { |c| Client.clients.delete(c) }
+    FileDescriptor.files.clear
+    Client.clients.clear
     @file = FileDescriptor.new("ruby", 12)
     @client = Client.new("andrius", "123", 9)
   end
@@ -65,7 +65,7 @@ describe Download do
     end
 
     it "should increase download speed if some downloads have finished" do
-      sleep(@download2.file.size / @client.speed)
+      sleep(@download2.file.size / @client.speed + 0.1)
       @client.speed.should == @client.max_speed
     end
 

@@ -6,8 +6,8 @@ describe Client do
   include CustomMatchers
 
   before :all do
-    FileDescriptor.files.each { |f| FileDescriptor.files.delete(f) }
-    Client.clients.each { |c| Client.clients.delete(c) }
+    FileDescriptor.files.clear
+    Client.clients.clear
     @username = "andrius"
     @password = "1234"
     @speed = 5

@@ -1,15 +1,13 @@
+require "#{File.dirname(__FILE__)}/client"
 require "#{File.dirname(__FILE__)}/file_descriptor"
 require 'yaml'
 
 class Main
 
   def start
-    Client.new("and", "123", 1)
-    FileDescriptor.new("ruby", 15)
-    FileDescriptor.new("rubymine", 200)
-    FileDescriptor.new("netbeans", 100)
-    FileDescriptor.new("java", 30)
-    #@fe = File.open("#{File.dirname(__FILE__)}/dump.yaml", "r") { |object| YAML::load(object) }
+    #initialize
+    Client.clients = File.open("#{File.dirname(__FILE__)}/client.yaml", "r") { |object| YAML::load(object) }
+    FileDescriptor.files = File.open("#{File.dirname(__FILE__)}/file.yaml", "r") { |object| YAML::load(object) }
     loop do
       puts "1. Log in"
       puts "2. Create account"
@@ -21,11 +19,11 @@ class Main
           username = gets.chomp
           puts "Enter password"
           password = gets.chomp
-          @client = Client::login(username, password)
+          @client = Client.login(username, password)
           puts
           if @client.nil?
             puts "Wrong username or password\n\n"
-          else
+          elses
             logged_in
             break
           end
@@ -37,13 +35,10 @@ class Main
             password = gets.chomp
             puts "Enter download speed"
             speed = Float(gets.chomp).round(2)
-            if @fe.create_client(username, password, speed).nil?
-              puts "Client already exists\n\n"
-            else
-              puts "Client created successfully\n\n"
-            end
+            Client.new(username, password, speed)
+            puts "Client created successfully\n\n"
           rescue Exception => msg
-            puts "#{msg}\n\n"
+            puts "\n#{msg}\n\n"
           end
         when "3" then
           break
@@ -51,8 +46,9 @@ class Main
           puts "Unrecognized command\n\n"
       end
     end
-    @client.cancel_unfinished_downloads
-    File.open("#{File.dirname(__FILE__)}/dump.yaml", "w") { |file| file.puts YAML::dump(@fe) }
+    @client.cancel_unfinished_downloads unless @client.nil?
+    File.open("#{File.dirname(__FILE__)}/client.yaml", "w") { |file| file.puts YAML::dump(Client.clients) }
+    File.open("#{File.dirname(__FILE__)}/file.yaml", "w") { |file| file.puts YAML::dump(FileDescriptor.files) }
   end
 
   def logged_in
@@ -69,26 +65,26 @@ class Main
       puts
       case input
         when "1" then
-          files = @fe.get_file_list.to_a
+          files = FileDescriptor.get_file_list.to_a
           file_list(files)
         when "2" then
           puts "Enter file name or part of it"
           query = gets.chomp
           puts
-          files = @fe.search(query).to_a
+          files = FileDescriptor.search(query).to_a
           if files.empty?
             puts "No files found\n\n"
           else
             file_list(files)
           end
         when "3" then
-          files = @fe.get_highest_rated_files.to_a
+          files = FileDescriptor.get_highest_rated_files.to_a
           file_list(files) {
             puts "Top rated files:"
             i = 0
             files.each do |f|
               i += 1
-              puts "#{i}. #{f} #{@fe.get_file(f).rating}"
+              puts "#{i}. #{f} #{FileDescriptor.get_file(f).rating}"
             end
             i
           }
@@ -100,10 +96,10 @@ class Main
             u_name = gets.chomp
             puts "Enter file size"
             u_size = Float(gets.chomp).round(2)
-            @fe.upload_file(u_name, u_size, @client)
+            @client.upload_file(FileDescriptor.new(u_name, u_size, true))
             puts "\nUpload started\n\n"
           rescue Exception => msg
-            puts "#\n{msg}\n\n"
+            puts "\n#{msg}\n\n"
           end
         when "6" then
           begin
@@ -144,7 +140,7 @@ class Main
       puts
       break if input == "x"
       if input.between?("1", "#{i}")
-        file = @fe.get_file(files[Integer(input) - 1])
+        file = FileDescriptor.get_file(files[Integer(input) - 1])
         loop do
           puts "Name: #{file.name}; Size: #{file.size}; Rating: #{file.rating}; Date uploaded: #{file.date}"
           puts "1. Download file"
@@ -154,7 +150,7 @@ class Main
           puts
           case input
             when "1" then
-              @client.new_download(file)
+              @client.download_file(file)
               puts "Download started\n\n"
             when "2" then
               begin
@@ -253,7 +249,7 @@ class Main
           input = gets.chomp
           puts
           if input == "y"
-            @fe.unregister(@client)
+            Client.unregister(@client)
             @client = nil
             break
           end
@@ -263,6 +259,16 @@ class Main
           puts "Unrecognized command\n\n"
       end
     end
+  end
+
+  def initialize
+    Client.clients = Set.new
+    FileDescriptor.files = Set.new
+    Client.new("and", "123", 1)
+    FileDescriptor.new("ruby", 15)
+    FileDescriptor.new("rubymine", 200)
+    FileDescriptor.new("netbeans", 100)
+    FileDescriptor.new("java", 30)
   end
 
   main = Main.new

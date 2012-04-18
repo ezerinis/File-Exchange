@@ -70,4 +70,8 @@ class FileDescriptor
   def self.files
     @@files
   end
+
+  def self.files=(files)
+    @@files = files
+  end
 end

@@ -97,4 +97,8 @@ class Client
   def self.clients
     @@clients
   end
+
+  def self.clients=(clients)
+    @@clients = clients
+  end
 end
