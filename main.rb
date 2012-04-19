@@ -1,13 +1,15 @@
 require "#{File.dirname(__FILE__)}/client"
 require "#{File.dirname(__FILE__)}/file_descriptor"
+require "#{File.dirname(__FILE__)}/moderator"
+require "#{File.dirname(__FILE__)}/user"
 require 'yaml'
 
 class Main
 
   def start
     #initialize
-    Client.clients = File.open("#{File.dirname(__FILE__)}/client.yaml", "r") { |object| YAML::load(object) }
-    FileDescriptor.files = File.open("#{File.dirname(__FILE__)}/file.yaml", "r") { |object| YAML::load(object) }
+    User.users = File.open("#{File.dirname(__FILE__)}/users.yaml", "r") { |object| YAML::load(object) }
+    FileDescriptor.files = File.open("#{File.dirname(__FILE__)}/files.yaml", "r") { |object| YAML::load(object) }
     loop do
       puts "1. Log in"
       puts "2. Create account"
@@ -19,12 +21,12 @@ class Main
           username = gets.chomp
           puts "Enter password"
           password = gets.chomp
-          @client = Client.login(username, password)
+          @user = User.login(username, password)
           puts
-          if @client.nil?
+          if @user.nil?
             puts "Wrong username or password\n\n"
           else
-            logged_in
+            @user.is_a?(Client) ? client_logged_in : moderator_logged_in
             break
           end
         when "2" then
@@ -46,12 +48,11 @@ class Main
           puts "Unrecognized command\n\n"
       end
     end
-    @client.cancel_unfinished_downloads unless @client.nil?
-    File.open("#{File.dirname(__FILE__)}/client.yaml", "w") { |file| file.puts YAML::dump(Client.clients) }
-    File.open("#{File.dirname(__FILE__)}/file.yaml", "w") { |file| file.puts YAML::dump(FileDescriptor.files) }
+    File.open("#{File.dirname(__FILE__)}/users.yaml", "w") { |file| file.puts YAML::dump(User.users) }
+    File.open("#{File.dirname(__FILE__)}/files.yaml", "w") { |file| file.puts YAML::dump(FileDescriptor.files) }
   end
 
-  def logged_in
+  def client_logged_in
     loop do
       puts "1. Get file list"
       puts "2. Search for file"
@@ -96,34 +97,35 @@ class Main
             u_name = gets.chomp
             puts "Enter file size"
             u_size = Float(gets.chomp).round(2)
-            @client.upload_file(FileDescriptor.new(u_name, u_size, true))
+            @user.upload_file(FileDescriptor.new(u_name, u_size, true))
             puts "\nUpload started\n\n"
           rescue Exception => msg
             puts "\n#{msg}\n\n"
           end
         when "6" then
           begin
-            speed = @client.speed
-            speed *= @client.active_downloads if @client.active_downloads > 1
+            speed = @user.speed
+            speed *= @user.active_downloads if @user.active_downloads > 1
             puts "Download speed: #{speed.round(2)} mbps"
             puts "Set prefered download speed"
             input = gets.chomp
-            @client.set_speed(Float(input))
-            speed = @client.speed
-            speed *= @client.active_downloads if @client.active_downloads > 1
+            @user.set_speed(Float(input))
+            speed = @user.speed
+            speed *= @user.active_downloads if @user.active_downloads > 1
             puts "Download speed is now #{speed.round(2)}\n\n"
           rescue Exception => msg
             puts "#{msg}\n\n"
           end
         when "7" then
           account_management
-          break if @client.nil?
+          break if @user.nil?
         when "8" then
           break
         else
           puts "Unrecognized command\n\n"
       end
     end
+    @user.cancel_unfinished_downloads unless @user.nil?
   end
 
   def file_list(files)
@@ -150,14 +152,14 @@ class Main
           puts
           case input
             when "1" then
-              @client.download_file(file)
+              @user.download_file(file)
               puts "Download started\n\n"
             when "2" then
               begin
                 puts "Enter rating between [1..5]"
                 rating = Integer(gets.chomp)
                 puts
-                file.rate(@client.username, rating)
+                file.rate(@user.username, rating)
                 puts "FileDescriptor rated successfully\n\n"
               rescue Exception => msg
                 puts "#{msg}\n\n"
@@ -175,13 +177,13 @@ class Main
   end
 
   def download_list
-    if @client.downloads.empty?
+    if @user.downloads.empty?
       puts "There are no downloads\n\n"
     else
       loop do
         puts "Downloads list:"
         i = 0
-        @client.downloads.each do |d|
+        @user.downloads.each do |d|
           i += 1
           puts "#{i}. #{d.file.name} #{d.progress.round(2)}% #{d.get_status}"
         end
@@ -192,7 +194,7 @@ class Main
         next if input == "r"
         break if input == "x"
         if input.between?("1", "#{i}")
-          download = @client.get_download(@client.downloads.to_a[Integer(input) - 1].file.name)
+          download = @user.get_download(@user.downloads.to_a[Integer(input) - 1].file.name)
           loop do
             puts "FileDescriptor: #{download.file.name}; Size: #{download.file.size}; Progress: #{download.progress.round(2)} Status: #{download.get_status}"
             puts "1. Pause download"
@@ -203,11 +205,11 @@ class Main
             puts
             case input
               when "1" then
-                @client.pause_download(download.file.name)
+                @user.pause_download(download.file.name)
               when "2" then
-                @client.resume_download(download.file.name)
+                @user.resume_download(download.file.name)
               when "3" then
-                @client.stop_download(download.file.name)
+                @user.stop_download(download.file.name)
                 break
               when "4" then
                 break
@@ -237,7 +239,7 @@ class Main
             puts "Repeat password"
             pass2 = gets.chomp
             puts
-            @client.change_password(pass1, pass2)
+            @user.change_password(pass1, pass2)
             puts "Password changed successfully\n\n"
           rescue Exception => msg
             puts "#{msg}\n\n"
@@ -249,8 +251,8 @@ class Main
           input = gets.chomp
           puts
           if input == "y"
-            Client.unregister(@client)
-            @client = nil
+            Client.unregister(@user)
+            @user = nil
             break
           end
         when "3" then
@@ -261,10 +263,94 @@ class Main
     end
   end
 
+  def moderator_logged_in
+    loop do
+      puts "1. Get client list"
+      puts "2. Search for client"
+      puts "3. Delete file"
+      puts "4. Logout"
+      input = gets.chomp
+      puts
+      case input
+        when "1" then
+          clients = @user.get_client_list.to_a
+          loop do
+            puts "Select client:"
+            i = 0
+            clients.each { |c| i += 1; puts "#{i}. #{c.username}" }
+            puts "x. Back"
+            input = gets.chomp
+            puts
+            break if input == "x"
+            if input.between?("1", "#{i}")
+              client = clients[Integer(input) - 1]
+              show_client(client)
+              break
+            else
+              puts "Unrecognized command\n\n"
+            end
+          end
+        when "2" then
+          puts "Enter client username"
+          username = gets.chomp
+          puts
+          client = @user.find_client(username)
+          if client.nil?
+            puts "No client with this username found\n\n"
+          else
+            show_client(client)
+          end
+        when "3" then
+          loop do
+            files = FileDescriptor.get_file_list.to_a
+            puts "Select file:"
+            i = 0
+            files.each { |f| i += 1; puts "#{i}. #{f}" }
+            puts "x. Back"
+            input = gets.chomp
+            puts
+            break if input == "x"
+            if input.between?("1", "#{i}")
+              file = FileDescriptor.get_file(files[Integer(input) - 1])
+              @user.delete_file(file)
+              puts "File deleted"
+            else
+              puts "Unrecognized command\n\n"
+            end
+          end
+        when "4" then
+          break
+        else
+          puts "Unrecognized command\n\n"
+      end
+    end
+  end
+
+  def show_client(client)
+    loop do
+      puts "Client: #{client.username}"
+      puts "1. Delete client"
+      puts "2. Back"
+      input = gets.chomp
+      puts
+      case input
+        when "1" then
+          @user.delete_client(client)
+          puts "Client deleted\n\n"
+          break
+        when "2" then
+          break
+        else
+          puts "Unrecognized command\n\n"
+      end
+    end
+  end
+
   def initialize
-    Client.clients = Set.new
+    User.users = Set.new
     FileDescriptor.files = Set.new
     Client.new("and", "123", 1)
+    Moderator.new("mod", "0000")
     FileDescriptor.new("ruby", 15)
     FileDescriptor.new("rubymine", 200)
     FileDescriptor.new("netbeans", 100)

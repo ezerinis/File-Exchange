@@ -5,7 +5,7 @@ describe FileDescriptor do
 
   before :all do
     FileDescriptor.files.clear
-    Client.clients.clear
+    Client.users.clear
     @name = "ruby"
     @size = 20
     @file = FileDescriptor.new(@name, @size)

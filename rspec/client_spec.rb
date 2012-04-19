@@ -7,7 +7,7 @@ describe Client do
 
   before :all do
     FileDescriptor.files.clear
-    Client.clients.clear
+    Client.users.clear
     @username = "andrius"
     @password = "1234"
     @speed = 5
@@ -18,8 +18,6 @@ describe Client do
   describe "client account creation" do
 
     it "should correctly assign variables" do
-      @client.username.should == @username
-      @client.password.should == @password
       @client.max_speed.should == @speed
       @client.speed.should == @speed
     end
@@ -30,68 +28,13 @@ describe Client do
     end
 
     it "should add client to clients list" do
-      Client.clients.should include(@client)
-    end
-
-    it "should check if name and password lengths are correct" do
-      lambda { Client.new("a", "123", 10) }.should raise_error
-      lambda { Client.new("too_long_username", "123", 10) }.should raise_error
-      lambda { Client.new("client", "1", 10) }.should raise_error
-      lambda { Client.new("client", "123456789456", 10) }.should raise_error
-      Client.clients.should == @old_clients
+      Client.users.should include(@client)
     end
 
     it "should check if speed is positive and not too big" do
       lambda { Client.new("qwerty", "123", -10) }.should raise_error
       lambda { Client.new("qwerty", "123", 100000) }.should raise_error
-      Client.clients.should == @old_clients
-    end
-
-    it "should not create client with existing username" do
-      lambda { Client.new("andrius", "pass", "10") }.should raise_error
-      Client.clients.should == @old_clients
-    end
-  end
-
-  describe "client authentication" do
-
-    it "should login client" do
-      @logged_in = Client.login(@username, @password)
-      @logged_in.username.should == @username
-    end
-
-    it "should not login client with wrong password" do
-      @logged_in = Client.login(@username, "bad_pass")
-      @logged_in.should be_nil
-    end
-
-    it "should unregister client" do
-      temp_client = Client.new("temp", "lll", 10)
-      Client.unregister(temp_client)
-      Client.clients.should_not include(temp_client)
-    end
-  end
-
-  describe "password change" do
-
-    before :all do
-      @new_pass = "new_pass"
-    end
-
-    it "should correctly change password" do
-      @client.change_password(@new_pass, @new_pass)
-      @client.password.should == @new_pass
-    end
-
-    it "should not change password if passwords don't match" do
-      lambda { @client.change_password("new_pass", "new_pas") }.should raise_error
-      @client.password.should == @new_pass
-    end
-
-    it "should not cahnge password if new password is too short or too long" do
-      lambda { @client.change_password("1", "1") }.should raise_error
-      lambda { @client.change_password("12345678910", "12345678910") }.should raise_error
-      @client.password.should == @new_pass
+      Client.users.should == @old_clients
     end
   end
 
@@ -166,6 +109,15 @@ describe Client do
       sleep(0.1)
       @client.cancel_unfinished_downloads
       @client.downloads.should include_download("file1")
+    end
+  end
+
+  describe "client account deletion" do
+
+    it "should unregister client" do
+      temp_client = Client.new("temp", "lll", 10)
+      Client.unregister(temp_client)
+      Client.users.should_not include(temp_client)
     end
   end
 end

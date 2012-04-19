@@ -8,7 +8,7 @@ describe Download do
 
   before :all do
     FileDescriptor.files.clear
-    Client.clients.clear
+    Client.users.clear
     @file = FileDescriptor.new("ruby", 12)
     @client = Client.new("andrius", "123", 9)
   end
