@@ -130,6 +130,11 @@ describe Client do
       FileDescriptor.files.should_not include_file(@name)
     end
 
+    it "should not allow to upload more than one file at the same time" do
+      lambda { @client.upload_file(FileDescriptor.new("new_upload", 20, true)) }.should raise_error
+      @client.downloads == @old_uploads.should
+    end
+
     it "should add file to files list when it's uploaded" do
       sleep(0.3)
       FileDescriptor.files.should include_file(@name)

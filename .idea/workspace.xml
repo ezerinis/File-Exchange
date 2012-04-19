@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1e1787d1-06bc-4074-a745-46e752ad5695" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client.rb" afterPath="$PROJECT_DIR$/client.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rspec/client_spec.rb" afterPath="$PROJECT_DIR$/rspec/client_spec.rb" />
     </list>
     <ignored path="File-Exchange.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,28 +30,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="183" column="37" selection-start="5496" selection-end="5496" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="download.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/download.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="35" selection-start="1502" selection-end="1502" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="download_spec.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="download_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rspec/download_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="157" column="40" selection-start="4630" selection-end="4630" vertical-scroll-proportion="0.5088282">
+            <state line="160" column="49" selection-start="4723" selection-end="4723" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -58,16 +42,16 @@
       <file leaf-file-name="client.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="50" selection-start="1739" selection-end="1739" vertical-scroll-proportion="0.0">
+            <state line="60" column="69" selection-start="1985" selection-end="1985" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="file_descriptor_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rspec/file_descriptor_spec.rb">
+      <file leaf-file-name="client_spec.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rspec/client_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="0" selection-start="2706" selection-end="2706" vertical-scroll-proportion="0.0">
+            <state line="134" column="41" selection-start="4213" selection-end="4213" vertical-scroll-proportion="0.4704918">
               <folding />
             </state>
           </provider>
@@ -89,22 +73,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/rspec/file_spec.rb" />
         <option value="$PROJECT_DIR$/file.rb" />
         <option value="$PROJECT_DIR$/rspec/test.rb" />
         <option value="$PROJECT_DIR$/file_exchange.rb" />
         <option value="$PROJECT_DIR$/rspec/custom_matchers.rb" />
         <option value="$PROJECT_DIR$/rspec/file_exchange_spec.rb" />
-        <option value="$PROJECT_DIR$/rspec/client_spec.rb" />
         <option value="$PROJECT_DIR$/dump.yaml" />
         <option value="$PROJECT_DIR$/file_descriptor.rb" />
-        <option value="$PROJECT_DIR$/client.rb" />
         <option value="$PROJECT_DIR$/rspec/file_descriptor_spec.rb" />
         <option value="$PROJECT_DIR$/file.yaml" />
         <option value="$PROJECT_DIR$/client.yaml" />
         <option value="$PROJECT_DIR$/main.rb" />
-        <option value="$PROJECT_DIR$/download.rb" />
         <option value="$PROJECT_DIR$/rspec/download_spec.rb" />
+        <option value="$PROJECT_DIR$/upload.rb" />
+        <option value="$PROJECT_DIR$/download.rb" />
+        <option value="$PROJECT_DIR$/rspec/client_spec.rb" />
+        <option value="$PROJECT_DIR$/client.rb" />
       </list>
     </option>
   </component>
@@ -234,7 +218,7 @@
       <recent name="C:\Users\Andrius\Documents\My eBooks\Ruby\File-Exchange\rspec" />
     </key>
   </component>
-  <component name="RunManager" selected="RSpec.RSpec Config">
+  <component name="RunManager" selected="Ruby.main">
     <configuration default="false" name="main" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
       <module name="File-Exchange" />
       <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -543,7 +527,11 @@
       <created>1334828567630</created>
       <updated>1334828567630</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="update">
+      <created>1334829941082</created>
+      <updated>1334829941082</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -646,11 +634,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_HOME_DIR$/rubystubs19/module.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="322" column="8" selection-start="11051" selection-end="11088" vertical-scroll-proportion="0.59519726" />
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/Ruby193/lib/ruby/gems/1.9.1/gems/rspec-core-2.8.0/lib/rspec/core/backward_compatibility.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="0" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0" />
@@ -666,11 +649,6 @@
         <state line="23" column="0" selection-start="912" selection-end="912" vertical-scroll-proportion="0.62760836" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rspec/custom_matchers.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="21" selection-start="21" selection-end="21" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/Ruby193/lib/ruby/gems/1.9.1/gems/rspec-core-2.8.0/lib/rspec/core/command_line.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="0" selection-start="893" selection-end="893" vertical-scroll-proportion="0.58196723" />
@@ -679,11 +657,6 @@
     <entry file="file://$PROJECT_DIR$/file_descriptor.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="69" column="16" selection-start="1826" selection-end="1826" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rspec/client_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="24" selection-start="271" selection-end="271" vertical-scroll-proportion="-3.514754" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/file.yaml">
@@ -707,13 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/download.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="35" selection-start="1502" selection-end="1502" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rspec/file_descriptor_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="94" column="0" selection-start="2706" selection-end="2706" vertical-scroll-proportion="0.0">
@@ -721,16 +687,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client.rb">
+    <entry file="file://$PROJECT_DIR$/rspec/custom_matchers.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="50" selection-start="1739" selection-end="1739" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="21" selection-start="21" selection-end="21" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rspec/download_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="40" selection-start="4630" selection-end="4630" vertical-scroll-proportion="0.5088282">
+        <state line="160" column="49" selection-start="4723" selection-end="4723" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/download.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="17" selection-start="1520" selection-end="1520" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="69" selection-start="1985" selection-end="1985" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rspec/client_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="134" column="41" selection-start="4213" selection-end="4213" vertical-scroll-proportion="0.4704918">
           <folding />
         </state>
       </provider>

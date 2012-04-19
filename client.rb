@@ -57,6 +57,8 @@ class Client
   end
 
   def upload_file(file)
+    found = @downloads.find { |d| d.is_upload && d.get_status != "finished" }
+    raise "Can't have more than one upload at the same time" if found
     download_file(file, true)
   end
 
