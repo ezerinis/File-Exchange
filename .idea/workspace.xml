@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1e1787d1-06bc-4074-a745-46e752ad5695" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client.rb" afterPath="$PROJECT_DIR$/client.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/download.rb" afterPath="$PROJECT_DIR$/download.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.rb" afterPath="$PROJECT_DIR$/main.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rspec/download_spec.rb" afterPath="$PROJECT_DIR$/rspec/download_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rspec/file_descriptor_spec.rb" afterPath="$PROJECT_DIR$/rspec/file_descriptor_spec.rb" />
     </list>
     <ignored path="File-Exchange.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,7 +49,7 @@
       <file leaf-file-name="download_spec.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rspec/download_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="172" column="17" selection-start="5050" selection-end="5050" vertical-scroll-proportion="0.918138">
+            <state line="157" column="40" selection-start="4630" selection-end="4630" vertical-scroll-proportion="0.5088282">
               <folding />
             </state>
           </provider>
@@ -219,7 +214,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="157" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="org.jetbrains.plugins.ruby.settings.RubyIdeSdkConfigurable" />
+    <property name="options.lastSelected" value="settings.github" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="162" />
@@ -544,7 +539,11 @@
       <created>1334778980921</created>
       <updated>1334778980921</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="update">
+      <created>1334828567630</created>
+      <updated>1334828567630</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -571,6 +570,7 @@
     <frame x="792" y="0" width="1128" height="1040" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.70971304" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -585,7 +585,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39955848" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -731,7 +730,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rspec/download_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="17" selection-start="5050" selection-end="5050" vertical-scroll-proportion="0.918138">
+        <state line="157" column="40" selection-start="4630" selection-end="4630" vertical-scroll-proportion="0.5088282">
           <folding />
         </state>
       </provider>
