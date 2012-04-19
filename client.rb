@@ -39,7 +39,7 @@ class Client < User
   end
 
   def upload_file(file)
-    found = @downloads.find { |d| d.is_upload && d.get_status != "finished" }
+    found = @downloads.find { |d| d.is_upload && d.get_status != Status::FIN }
     raise "Can't have more than one upload at the same time" if found
     download_file(file, true)
   end
@@ -75,6 +75,6 @@ class Client < User
   end
 
   def cancel_unfinished_downloads
-    @downloads.each { |d| stop_download(d.file.name) if d.get_status != "finished"}
+    @downloads.each { |d| stop_download(d.file.name) if d.get_status != Status::FIN}
   end
 end

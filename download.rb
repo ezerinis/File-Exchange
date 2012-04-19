@@ -1,3 +1,5 @@
+require "#{File.dirname(__FILE__)}/status"
+
 class Download
   attr_accessor :file, :client, :progress, :is_upload
 
@@ -34,14 +36,14 @@ class Download
   end
 
   def pause
-    if get_status == "downloading"
+    if get_status == Status::DOW
       @paused = true
       @client.increase_speed
     end
   end
 
   def resume
-    if get_status == "paused"
+    if get_status == Status::PAU
       @paused = false
       @client.decrease_speed
       @thread.wakeup
@@ -49,16 +51,16 @@ class Download
   end
 
   def stop
-    if get_status != "finished"
+    if get_status != Status::FIN
       @thread.kill
       @client.increase_speed unless @paused
     end
   end
 
   def get_status
-    return "finished" if @progress == 100
-    return "paused" if @paused
-    return "uploading" if is_upload
-    "downloading"
+    return Status::FIN if @progress == 100
+    return Status::PAU if @paused
+    return Status::UPL if is_upload
+    Status::DOW
   end
 end

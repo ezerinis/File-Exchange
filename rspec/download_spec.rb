@@ -153,14 +153,14 @@ describe Download do
     it "should correctly return download status" do
       download = Download.new(FileDescriptor.new("file", 1), @client)
       download.start
-      download.get_status.should == "downloading"
+      download.get_status.should == Status::DOW
       download.pause
-      download.get_status.should == "paused"
+      download.get_status.should == Status::PAU
       sleep(0.1)
       download.resume
-      download.get_status.should == "downloading"
+      download.get_status.should == Status::DOW
       sleep(0.2)
-      download.get_status.should == "finished"
+      download.get_status.should == Status::FIN
     end
   end
 
@@ -169,7 +169,7 @@ describe Download do
     it "should correctly return uplaod status" do
       upload = Download.new(FileDescriptor.new("upload", 0.2, true), @client, true)
       upload.start
-      upload.get_status.should == "uploading"
+      upload.get_status.should == Status::UPL
       upload.stop
     end
   end
