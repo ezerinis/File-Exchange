@@ -1,3 +1,4 @@
+require "#{File.dirname(__FILE__)}/../client"
 require "#{File.dirname(__FILE__)}/../file_descriptor"
 
 describe FileDescriptor do

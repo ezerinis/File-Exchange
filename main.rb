@@ -23,7 +23,7 @@ class Main
           puts
           if @client.nil?
             puts "Wrong username or password\n\n"
-          elses
+          else
             logged_in
             break
           end

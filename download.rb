@@ -1,17 +1,18 @@
 class Download
-  attr_accessor :file, :client, :progress
+  attr_accessor :file, :client, :progress, :is_upload
 
   SLEEP_INTERVAL = 0.1
 
   def initialize(file, client, is_upload = false)
     @file = file
     @client = client
+    @is_upload = is_upload
     @progress = 0
     @paused = false
     @thread = nil
   end
 
-  def start(is_upload = false)
+  def start
     @thread = Thread.new do
       while @progress < 100
         Thread.stop if @paused
@@ -27,7 +28,7 @@ class Download
       end
       @client.speed = (@client.speed * @client.active_downloads) / (@client.active_downloads - 1) if @client.active_downloads > 1
       @client.active_downloads -= 1
-      FileDescriptor.files.add(@file) if is_upload
+      FileDescriptor.files.add(@file) if @is_upload
       @thread = nil
     end
   end
@@ -56,7 +57,8 @@ class Download
 
   def get_status
     return "finished" if @progress == 100
-    return "downloading" if !@paused
-    "paused"
+    return "paused" if @paused
+    return "uploading" if is_upload
+    "downloading"
   end
 end

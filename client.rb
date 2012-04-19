@@ -53,7 +53,7 @@ class Client
     download = Download.new(file, self, is_upload)
     @downloads.add(download)
     decrease_speed
-    download.start(is_upload)
+    download.start
   end
 
   def upload_file(file)

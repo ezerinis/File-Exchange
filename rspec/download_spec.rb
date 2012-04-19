@@ -163,4 +163,14 @@ describe Download do
       download.get_status.should == "finished"
     end
   end
+
+  describe "upload status" do
+
+    it "should correctly return uplaod status" do
+      upload = Download.new(FileDescriptor.new("upload", 0.2, true), @client, true)
+      upload.start
+      upload.get_status.should == "uploading"
+      upload.stop
+    end
+  end
 end
