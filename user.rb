@@ -26,6 +26,10 @@ class User
     @password = pass1
   end
 
+  def self.load
+    @@users = File.open("#{File.dirname(__FILE__)}/users.yaml", "r") { |object| YAML::load(object) }
+  end
+
   def self.users
     @@users
   end

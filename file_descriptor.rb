@@ -67,6 +67,10 @@ class FileDescriptor
     @rating = @sum / @clients.size
   end
 
+  def self.load
+    @@files = File.open("#{File.dirname(__FILE__)}/files.yaml", "r") { |object| YAML::load(object) }
+  end
+
   def self.files
     @@files
   end

@@ -8,8 +8,8 @@ class Main
 
   def start
     #initialize
-    User.users = File.open("#{File.dirname(__FILE__)}/users.yaml", "r") { |object| YAML::load(object) }
-    FileDescriptor.files = File.open("#{File.dirname(__FILE__)}/files.yaml", "r") { |object| YAML::load(object) }
+    User.load
+    FileDescriptor.load
     loop do
       puts "1. Log in"
       puts "2. Create account"
