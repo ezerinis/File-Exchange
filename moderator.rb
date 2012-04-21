@@ -12,7 +12,9 @@ class Moderator < User
   end
 
   def find_client(name)
-    Client.users.find { |u| u.username == name && u.is_a?(Client) }
+    client = Client.users.find { |u| u.username == name && u.is_a?(Client) }
+    raise "No client with this username found" if client.nil?
+    client
   end
 
   def delete_client(client)

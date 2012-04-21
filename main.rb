@@ -15,22 +15,18 @@ class Main
       puts "2. Create account"
       input = gets.chomp
       puts
-      case input
-        when "1" then
-          puts "Enter username"
-          username = gets.chomp
-          puts "Enter password"
-          password = gets.chomp
-          @user = User.login(username, password)
-          puts
-          if @user.nil?
-            puts "Wrong username or password\n\n"
-          else
+      begin
+        case input
+          when "1" then
+            puts "Enter username"
+            username = gets.chomp
+            puts "Enter password"
+            password = gets.chomp
+            @user = User.login(username, password)
+            puts
             @user.is_a?(Client) ? client_logged_in : moderator_logged_in
             break
-          end
-        when "2" then
-          begin
+          when "2" then
             puts "Enter username"
             username = gets.chomp
             puts "Enter password"
@@ -39,17 +35,17 @@ class Main
             speed = Float(gets.chomp).round(2)
             Client.new(username, password, speed)
             puts "Client created successfully\n\n"
-          rescue Exception => msg
-            puts "\n#{msg}\n\n"
-          end
-        when "3" then
-          break
-        else
-          puts "Unrecognized command\n\n"
+          when "3" then
+            break
+          else
+            puts "Unrecognized command\n\n"
+        end
+      rescue Exception => msg
+        puts "\n#{msg}\n\n"
       end
     end
-    File.open("#{File.dirname(__FILE__)}/users.yaml", "w") { |file| file.puts YAML::dump(User.users) }
-    File.open("#{File.dirname(__FILE__)}/files.yaml", "w") { |file| file.puts YAML::dump(FileDescriptor.files) }
+    User.save
+    FileDescriptor.save
   end
 
   def client_logged_in
@@ -64,65 +60,53 @@ class Main
       puts "8. Logout"
       input = gets.chomp
       puts
-      case input
-        when "1" then
-          files = FileDescriptor.get_file_list.to_a
-          file_list(files)
-        when "2" then
-          puts "Enter file name or part of it"
-          query = gets.chomp
-          puts
-          files = FileDescriptor.search(query).to_a
-          if files.empty?
-            puts "No files found\n\n"
-          else
+      begin
+        case input
+          when "1" then
+            files = FileDescriptor.get_file_list.to_a
             file_list(files)
-          end
-        when "3" then
-          files = FileDescriptor.get_highest_rated_files.to_a
-          file_list(files) {
-            puts "Top rated files:"
-            i = 0
-            files.each do |f|
-              i += 1
-              puts "#{i}. #{f} #{FileDescriptor.get_file(f).rating}"
-            end
-            i
-          }
-        when "4" then
-          download_list
-        when "5" then
-          begin
+          when "2" then
+            puts "Enter file name or part of it"
+            query = gets.chomp
+            puts
+            files = FileDescriptor.search(query).to_a
+            files.empty? ? (puts "No files found\n\n") : file_list(files)
+          when "3" then
+            files = FileDescriptor.get_highest_rated_files.to_a
+            file_list(files) {
+              puts "Top rated files:"
+              i = 0
+              files.each do |f|
+                i += 1
+                puts "#{i}. #{f} #{FileDescriptor.get_file(f).rating}"
+              end
+              i
+            }
+          when "4" then
+            download_list
+          when "5" then
             puts "Enter file name"
             u_name = gets.chomp
             puts "Enter file size"
             u_size = Float(gets.chomp).round(2)
             @user.upload_file(FileDescriptor.new(u_name, u_size, true))
             puts "\nUpload started\n\n"
-          rescue Exception => msg
-            puts "\n#{msg}\n\n"
-          end
-        when "6" then
-          begin
-            speed = @user.speed
-            speed *= @user.active_downloads if @user.active_downloads > 1
-            puts "Download speed: #{speed.round(2)} mbps"
+          when "6" then
+            puts "Download speed: #{@user.get_total_speed.round(2)} mbps"
             puts "Set prefered download speed"
             input = gets.chomp
             @user.set_speed(Float(input))
-            speed = @user.speed
-            speed *= @user.active_downloads if @user.active_downloads > 1
-            puts "Download speed is now #{speed.round(2)}\n\n"
-          rescue Exception => msg
-            puts "#{msg}\n\n"
-          end
-        when "7" then
-          account_management
-          break if @user.nil?
-        when "8" then
-          break
-        else
-          puts "Unrecognized command\n\n"
+            puts "\nDownload speed is now #{@user.get_total_speed.round(2)}\n\n"
+          when "7" then
+            account_management
+            break if @user.nil?
+          when "8" then
+            break
+          else
+            puts "Unrecognized command\n\n"
+        end
+      rescue Exception => msg
+        puts "\n#{msg}\n\n"
       end
     end
     @user.cancel_unfinished_downloads unless @user.nil?
@@ -291,14 +275,14 @@ class Main
             end
           end
         when "2" then
-          puts "Enter client username"
-          username = gets.chomp
-          puts
-          client = @user.find_client(username)
-          if client.nil?
-            puts "No client with this username found\n\n"
-          else
+          begin
+            puts "Enter client username"
+            username = gets.chomp
+            puts
+            client = @user.find_client(username)
             show_client(client)
+          rescue Exception => msg
+            puts "#{msg}\n\n"
           end
         when "3" then
           loop do

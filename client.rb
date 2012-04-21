@@ -31,6 +31,11 @@ class Client < User
     @speed = @speed / @active_downloads if @active_downloads > 0
   end
 
+  def get_total_speed
+    return @speed * @active_downloads if @active_downloads > 1
+    @speed
+  end
+
   def download_file(file, is_upload = false)
     download = Download.new(file, self, is_upload)
     @downloads.add(download)
@@ -75,6 +80,6 @@ class Client < User
   end
 
   def cancel_unfinished_downloads
-    @downloads.each { |d| stop_download(d.file.name) if d.get_status != Status::FIN}
+    @downloads.each { |d| stop_download(d.file.name) if d.get_status != Status::FIN }
   end
 end

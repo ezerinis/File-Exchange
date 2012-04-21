@@ -1,5 +1,6 @@
 require 'date'
 require 'set'
+require 'yaml'
 
 class FileDescriptor
   attr_accessor :name, :size, :date, :rating
@@ -69,6 +70,10 @@ class FileDescriptor
 
   def self.load
     @@files = File.open("#{File.dirname(__FILE__)}/files.yaml", "r") { |object| YAML::load(object) }
+  end
+
+  def self.save
+    File.open("#{File.dirname(__FILE__)}/files.yaml", "w") { |file| file.puts YAML::dump(@@files) }
   end
 
   def self.files

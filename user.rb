@@ -17,7 +17,9 @@ class User
   end
 
   def self.login(username, password)
-    @@users.find { |c| c.username == username && c.password == password }
+    user = @@users.find { |c| c.username == username && c.password == password }
+    raise "Wrong username or password" if user.nil?
+    user
   end
 
   def change_password(pass1, pass2)
@@ -28,6 +30,10 @@ class User
 
   def self.load
     @@users = File.open("#{File.dirname(__FILE__)}/users.yaml", "r") { |object| YAML::load(object) }
+  end
+
+  def self.save
+    File.open("#{File.dirname(__FILE__)}/users.yaml", "w") { |file| file.puts YAML::dump(@@users) }
   end
 
   def self.users
