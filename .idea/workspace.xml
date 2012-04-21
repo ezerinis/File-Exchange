@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1e1787d1-06bc-4074-a745-46e752ad5695" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client.rb" afterPath="$PROJECT_DIR$/client.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/file_descriptor.rb" afterPath="$PROJECT_DIR$/file_descriptor.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.rb" afterPath="$PROJECT_DIR$/main.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/moderator.rb" afterPath="$PROJECT_DIR$/moderator.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user.rb" afterPath="$PROJECT_DIR$/user.rb" />
     </list>
     <ignored path="File-Exchange.iws" />
@@ -37,10 +35,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="263" column="35" selection-start="7504" selection-end="7504" vertical-scroll-proportion="0.0">
+            <state line="14" column="30" selection-start="421" selection-end="421" vertical-scroll-proportion="0.38636363">
               <folding />
             </state>
           </provider>
@@ -49,25 +47,16 @@
       <file leaf-file-name="file_descriptor_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/file_descriptor_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="3" selection-start="3729" selection-end="3729" vertical-scroll-proportion="0.0">
+            <state line="122" column="63" selection-start="3688" selection-end="3688" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/client_spec.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="5" selection-start="3925" selection-end="3925" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user_spec.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="user_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/user_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="53" selection-start="2308" selection-end="2308" vertical-scroll-proportion="0.7567568">
+            <state line="77" column="53" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -76,7 +65,7 @@
       <file leaf-file-name="file_descriptor.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/file_descriptor.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="5" selection-start="2158" selection-end="2158" vertical-scroll-proportion="0.0">
+            <state line="74" column="20" selection-start="1941" selection-end="1941" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -104,16 +93,16 @@
         <option value="$PROJECT_DIR$/rspec/download_spec.rb" />
         <option value="$PROJECT_DIR$/rspec/spec_helper.rb" />
         <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
-        <option value="$PROJECT_DIR$/user.rb" />
         <option value="$PROJECT_DIR$/moderator.rb" />
         <option value="$PROJECT_DIR$/spec/moderator_spec.rb" />
         <option value="$PROJECT_DIR$/client.rb" />
-        <option value="$PROJECT_DIR$/main.rb" />
-        <option value="$PROJECT_DIR$/file_descriptor.rb" />
-        <option value="$PROJECT_DIR$/spec/file_descriptor_spec.rb" />
         <option value="$PROJECT_DIR$/spec/download_spec.rb" />
         <option value="$PROJECT_DIR$/spec/client_spec.rb" />
+        <option value="$PROJECT_DIR$/user.rb" />
+        <option value="$PROJECT_DIR$/file_descriptor.rb" />
         <option value="$PROJECT_DIR$/spec/user_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/file_descriptor_spec.rb" />
+        <option value="$PROJECT_DIR$/main.rb" />
       </list>
     </option>
   </component>
@@ -195,6 +184,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="File-Exchange" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="File-Exchange" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="coverage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -229,7 +232,7 @@
       <recent name="C:\Users\Andrius\Documents\My eBooks\Ruby\File-Exchange" />
     </key>
   </component>
-  <component name="RunManager" selected="RSpec.All specs in: File-Exchange">
+  <component name="RunManager" selected="Ruby.main">
     <configuration default="false" name="client_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="File-Exchange" />
@@ -515,7 +518,11 @@
       <created>1335014673868</created>
       <updated>1335014673868</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="update">
+      <created>1335027119513</created>
+      <updated>1335027119513</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -544,20 +551,20 @@
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32974318" sideWeight="0.7207506" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.123123124" sideWeight="0.32671082" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20580913" sideWeight="0.7218543" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39955848" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.123123124" sideWeight="0.33222958" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28476822" sideWeight="0.20112781" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2781457" sideWeight="0.79229325" order="2" side_tool="false" content_ui="tabs" x="556" y="371" width="1332" height="298" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.123123124" sideWeight="0.33222958" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.123123124" sideWeight="0.32671082" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20580913" sideWeight="0.7218543" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2781457" sideWeight="0.79229325" order="2" side_tool="false" content_ui="tabs" x="556" y="371" width="1332" height="298" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39955848" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32974318" sideWeight="0.7207506" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -619,11 +626,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.rspec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/custom_matchers.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="18" selection-start="18" selection-end="18" vertical-scroll-proportion="0.0" />
@@ -639,24 +641,9 @@
         <state line="23" column="42" selection-start="597" selection-end="598" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.1910828" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="21" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="693" selection-end="693" vertical-scroll-proportion="0.33333334" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/moderator_spec.rb">
@@ -669,11 +656,6 @@
         <state line="15" column="0" selection-start="344" selection-end="344" vertical-scroll-proportion="0.40605095" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="263" column="35" selection-start="7504" selection-end="7504" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/download_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="144" column="15" selection-start="4105" selection-end="4105" vertical-scroll-proportion="0.65023845">
@@ -681,30 +663,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/file_descriptor.rb">
+    <entry file="file://$PROJECT_DIR$/files.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="5" selection-start="2158" selection-end="2158" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/file_descriptor_spec.rb">
+    <entry file="file://$PROJECT_DIR$/users.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="3" selection-start="3729" selection-end="3729" vertical-scroll-proportion="0.0">
+        <state line="2" column="21" selection-start="48" selection-end="48" vertical-scroll-proportion="0.054054055">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/client_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="5" selection-start="3925" selection-end="3925" vertical-scroll-proportion="0.0">
+        <state line="131" column="5" selection-start="3925" selection-end="3925" vertical-scroll-proportion="0.8108108">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="18" selection-start="1143" selection-end="1143" vertical-scroll-proportion="0.7483766">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file_descriptor.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="20" selection-start="1941" selection-end="1941" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/user_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="53" selection-start="2308" selection-end="2308" vertical-scroll-proportion="0.7567568">
+        <state line="77" column="53" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/file_descriptor_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="122" column="63" selection-start="3688" selection-end="3688" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coverage/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="30" selection-start="421" selection-end="421" vertical-scroll-proportion="0.38636363">
           <folding />
         </state>
       </provider>

@@ -8,8 +8,8 @@ class Main
 
   def start
     #initialize
-    User.load
-    FileDescriptor.load
+    User.load("#{File.dirname(__FILE__)}/users.yaml")
+    FileDescriptor.load("#{File.dirname(__FILE__)}/files.yaml")
     loop do
       puts "1. Log in"
       puts "2. Create account"
@@ -44,8 +44,8 @@ class Main
         puts "\n#{msg}\n\n"
       end
     end
-    User.save
-    FileDescriptor.save
+    User.save("#{File.dirname(__FILE__)}/users.yaml")
+    FileDescriptor.save("#{File.dirname(__FILE__)}/files.yaml")
   end
 
   def client_logged_in

@@ -28,12 +28,12 @@ class User
     @password = pass1
   end
 
-  def self.load
-    @@users = File.open("#{File.dirname(__FILE__)}/users.yaml", "r") { |object| YAML::load(object) }
+  def self.load(file)
+    @@users = File.open(file, "r") { |object| YAML::load(object) }
   end
 
-  def self.save
-    File.open("#{File.dirname(__FILE__)}/users.yaml", "w") { |file| file.puts YAML::dump(@@users) }
+  def self.save(file)
+    File.open(file, "w") { |file| file.puts YAML::dump(@@users) }
   end
 
   def self.users
